@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        header img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto;
         }
         .calendar {
             display: inline-block;
@@ -14,7 +28,7 @@
         }
         .calendar th, .calendar td {
             border: 1px solid #999;
-            padding: 5px;
+            padding: 10px;
             text-align: center;
         }
         .month {
@@ -28,51 +42,130 @@
         .day {
             height: 100px;
             vertical-align: top;
+            position: relative;
         }
         .today {
             background-color: #ffeb3b;
         }
+        .event {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            right: 5px;
+            background-color: #2196F3;
+            color: white;
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .navigation {
+            margin: 20px;
+        }
+        .navigation button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        @media (max-width: 600px) {
+            .day {
+                height: 80px;
+            }
+            .navigation button {
+                width: 45%;
+                margin: 2.5%;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Ultraschall-Gefaess-Quiz</h1>
-    <p>This is a simple project website hosted on GitHub Pages using the Minima theme.</p>
+    <header>
+        <img src="logo.png" alt="Ultraschall-Gefaess-Quiz Logo">
+        <h1>Welcome to Ultraschall-Gefaess-Quiz</h1>
+        <p>This is a simple project website hosted on GitHub Pages using the Minima theme.</p>
+    </header>
 
-    <table class="calendar">
-        <tr class="month">
-            <th colspan="7">June 2024</th>
-        </tr>
-        <tr class="day-header">
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-        </tr>
-        <tr>
-            <td class="day"></td>
-            <td class="day"></td>
-            <td class="day"></td>
-            <td class="day"></td>
-            <td class="day"></td>
-            <td class="day"></td>
-            <td class="day">1</td>
-        </tr>
-        <tr>
-            <td class="day">2</td>
-            <td class="day">3</td>
-            <td class="day">4</td>
-            <td class="day">5</td>
-            <td class="day">6</td>
-            <td class="day">7</td>
-            <td class="day">8</td>
-        </tr>
-        <!-- More weeks here -->
-    </table>
+    <div class="navigation">
+        <button onclick="prevMonth()">Previous</button>
+        <button onclick="nextMonth()">Next</button>
+    </div>
 
-    <p>testestest</p>
-    <p>Das ist meine index.html Datei und das hier theme: minima.</p>
+    <div id="calendar-container"></div>
+
+    <script>
+        const events = {
+            "2024-06-07": { title: "Medical Quiz Event 1", color: "#FF5722" },
+            "2024-06-15": { title: "Medical Quiz Event 2", color: "#4CAF50" },
+            // Add more events here
+        };
+
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        function renderCalendar(month, year) {
+            const calendarContainer = document.getElementById('calendar-container');
+            calendarContainer.innerHTML = generateCalendarHTML(month, year);
+        }
+
+        function generateCalendarHTML(month, year) {
+            const date = new Date(year, month);
+            const monthName = date.toLocaleString('default', { month: 'long' });
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+            let html = `
+                <table class="calendar">
+                    <tr class="month">
+                        <th colspan="7">${monthName} ${year}</th>
+                    </tr>
+                    <tr class="day-header">
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                    <tr>
+            `;
+            for (let i = 0; i < firstDay; i++) {
+                html += `<td class="day"></td>`;
+            }
+            for (let day = 1; day <= lastDate; day++) {
+                const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                html += `<td class="day${dateString === new Date().toISOString().slice(0, 10) ? ' today' : ''}">`;
+                html += day;
+                if (events[dateString]) {
+                    html += `<div class="event" style="background-color: ${events[dateString].color};">${events[dateString].title}</div>`;
+                }
+                html += `</td>`;
+                if ((day + firstDay) % 7 === 0) {
+                    html += `</tr><tr>`;
+                }
+            }
+            html += `</tr></table>`;
+            return html;
+        }
+
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar(currentMonth, currentYear);
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar(currentMonth, currentYear);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCalendar(currentMonth, currentYear);
+        });
+    </script>
 </body>
 </html>
