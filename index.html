@@ -41,8 +41,8 @@
             padding: 5px 0;
         }
         .language-switcher img {
-            width: 24px;
-            height: 24px;
+            width: 50px;
+            height: 25px;
         }
         .calendar-container {
             width: 100%;
@@ -79,10 +79,14 @@
             position: absolute;
         }
         .month .prev {
-            left: 10px;
+            left: 0;
         }
         .month .next {
-            right: 10px;
+            right: 0;
+        }
+        .month-name {
+            flex-grow: 1;
+            text-align: center;
         }
         .day-header {
             background-color: #f2f2f2;
@@ -116,6 +120,12 @@
             .calendar th, .calendar td {
                 padding: 10px;
                 min-width: 60px;
+            }
+            header img {
+                max-width: 80px;
+            }
+            header {
+                padding: 15px;
             }
         }
     </style>
@@ -188,7 +198,7 @@
                 <table class="calendar">
                     <tr class="month">
                         <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
-                        <th colspan="5">${monthName} ${year}</th>
+                        <th class="month-name" colspan="5">${monthName} ${year}</th>
                         <button class="next" onclick="nextMonth()">${translations[currentLanguage].next}</button>
                     </tr>
                     <tr class="day-header">
