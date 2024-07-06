@@ -66,11 +66,19 @@
             font-size: 16px;
             margin: 0 10px;
         }
+        .language-switcher {
+            margin: 20px;
+        }
+        .language-switcher button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+        }
         @media (max-width: 600px) {
             .day {
                 height: 80px;
             }
-            .navigation button {
+            .navigation button, .language-switcher button {
                 width: 40%;
                 margin: 10px 5%;
             }
@@ -80,13 +88,18 @@
 <body>
     <header>
         <img src="logo.png" alt="Ultraschall-Gefaess-Quiz Logo">
-        <h1>Welcome to Ultraschall-Gefaess-Quiz</h1>
-        <p>This is a simple project website hosted on GitHub Pages using the Minima theme.</p>
+        <h1 id="title">Willkommen beim Ultraschall-Gefäß-Quiz</h1>
+        <p id="description">Dies ist eine einfache Projektwebsite, die auf GitHub Pages mit dem Minima-Theme gehostet wird.</p>
     </header>
 
     <div class="navigation">
-        <button onclick="prevMonth()">Previous</button>
-        <button onclick="nextMonth()">Next</button>
+        <button onclick="prevMonth()">Vorheriger</button>
+        <button onclick="nextMonth()">Nächster</button>
+    </div>
+
+    <div class="language-switcher">
+        <button onclick="setLanguage('de')">DE</button>
+        <button onclick="setLanguage('en')">EN</button>
     </div>
 
     <div id="calendar-container"></div>
@@ -98,8 +111,37 @@
             // Add more events here
         };
 
+        const translations = {
+            "de": {
+                "title": "Willkommen beim Ultraschall-Gefäß-Quiz",
+                "description": "Dies ist eine einfache Projektwebsite, die auf GitHub Pages mit dem Minima-Theme gehostet wird.",
+                "previous": "Vorheriger",
+                "next": "Nächster",
+                "monthNames": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+                "dayNames": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
+            },
+            "en": {
+                "title": "Welcome to Ultrasound Vessel Quiz",
+                "description": "This is a simple project website hosted on GitHub Pages using the Minima theme.",
+                "previous": "Previous",
+                "next": "Next",
+                "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                "dayNames": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+            }
+        };
+
+        let currentLanguage = 'de';
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
+
+        function setLanguage(language) {
+            currentLanguage = language;
+            document.getElementById('title').innerText = translations[language].title;
+            document.getElementById('description').innerText = translations[language].description;
+            document.querySelector('.navigation button:nth-child(1)').innerText = translations[language].previous;
+            document.querySelector('.navigation button:nth-child(2)').innerText = translations[language].next;
+            renderCalendar(currentMonth, currentYear);
+        }
 
         function renderCalendar(month, year) {
             const calendarContainer = document.getElementById('calendar-container');
@@ -108,22 +150,18 @@
 
         function generateCalendarHTML(month, year) {
             const date = new Date(year, month);
-            const monthName = date.toLocaleString('default', { month: 'long' });
+            const monthName = translations[currentLanguage].monthNames[month];
             const firstDay = new Date(year, month, 1).getDay();
             const lastDate = new Date(year, month + 1, 0).getDate();
+            const dayNames = translations[currentLanguage].dayNames;
+
             let html = `
                 <table class="calendar">
                     <tr class="month">
                         <th colspan="7">${monthName} ${year}</th>
                     </tr>
                     <tr class="day-header">
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
+                        ${dayNames.map(day => `<th>${day}</th>`).join('')}
                     </tr>
                     <tr>
             `;
@@ -165,7 +203,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderCalendar(currentMonth, currentYear);
+            setLanguage(currentLanguage);
         });
     </script>
 </body>
