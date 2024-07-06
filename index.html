@@ -31,22 +31,29 @@
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            flex-direction: column;
         }
         .language-switcher button {
             border: none;
             background: none;
             cursor: pointer;
-            padding: 0 10px;
+            padding: 5px 0;
         }
         .language-switcher img {
-            width: 50px;
-            height: 25px;
+            width: 24px;
+            height: 24px;
+        }
+        .calendar-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
         .calendar {
             display: inline-block;
             border-collapse: collapse;
             width: 100%;
-            max-width: 800px;
             margin: 20px auto;
         }
         .calendar th, .calendar td {
@@ -60,14 +67,22 @@
             font-size: 24px;
             padding: 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            position: relative;
         }
         .month button {
             background: none;
             border: none;
             font-size: 24px;
             cursor: pointer;
+            position: absolute;
+        }
+        .month .prev {
+            left: 10px;
+        }
+        .month .next {
+            right: 10px;
         }
         .day-header {
             background-color: #f2f2f2;
@@ -95,11 +110,7 @@
             .day {
                 height: 80px;
             }
-            .language-switcher {
-                top: 10px;
-                right: 10px;
-            }
-            .month button {
+            .month {
                 font-size: 20px;
             }
             .calendar th, .calendar td {
@@ -120,7 +131,9 @@
         <p id="description">Dies ist eine einfache Projektwebsite, die auf GitHub Pages mit dem Minima-Theme gehostet wird.</p>
     </header>
 
-    <div id="calendar-container"></div>
+    <div class="calendar-container">
+        <div id="calendar-container"></div>
+    </div>
 
     <script>
         const events = {
@@ -174,9 +187,9 @@
             let html = `
                 <table class="calendar">
                     <tr class="month">
-                        <button onclick="prevMonth()">${translations[currentLanguage].previous}</button>
+                        <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
                         <th colspan="5">${monthName} ${year}</th>
-                        <button onclick="nextMonth()">${translations[currentLanguage].next}</button>
+                        <button class="next" onclick="nextMonth()">${translations[currentLanguage].next}</button>
                     </tr>
                     <tr class="day-header">
                         ${dayNames.map(day => `<th>${day}</th>`).join('')}
