@@ -115,6 +115,24 @@
         .about-us h2 {
             text-align: center;
         }
+        footer {
+            background-color: #2196F3;
+            color: white;
+            width: 100%;
+            padding: 20px 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        footer img {
+            max-width: 50px;
+            margin-bottom: 10px;
+        }
+        footer p {
+            margin: 5px 0;
+        }
         @media (max-width: 600px) {
             .day {
                 height: 80px;
@@ -128,6 +146,9 @@
             }
             header {
                 padding: 15px;
+            }
+            footer img {
+                max-width: 40px;
             }
         }
     </style>
@@ -153,6 +174,11 @@
         <h2 id="about-title">Über uns</h2>
         <p id="about-description">Hier können Sie Ihr Team vorstellen. Beschreiben Sie Ihre Teammitglieder und deren Rolle im Projekt.</p>
     </div>
+
+    <footer>
+        <img src="logo.png" alt="Ultraschall-Gefaess-Quiz Logo">
+        <p>© 2024 Ultraschall-Gefaess-Quiz. All rights reserved.</p>
+    </footer>
 
     <script>
         const events = {
