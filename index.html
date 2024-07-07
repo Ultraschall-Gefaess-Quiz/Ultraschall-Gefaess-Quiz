@@ -105,14 +105,14 @@
             width: 100%;
             margin: 40px 0;
         }
-        .about-us {
+        .about-us, .contact {
             width: 100%;
             max-width: 800px;
             padding: 0 10px;
             box-sizing: border-box;
             text-align: left;
         }
-        .about-us h2 {
+        .about-us h2, .contact h2 {
             text-align: center;
         }
         footer {
@@ -175,6 +175,13 @@
         <p id="about-description">Hier können Sie Ihr Team vorstellen. Beschreiben Sie Ihre Teammitglieder und deren Rolle im Projekt.</p>
     </div>
 
+    <div class="separator"></div>
+
+    <div class="contact">
+        <h2 id="contact-title">Kontakt</h2>
+        <p id="contact-description">E-Mail: info@ultraschall-gefaess-quiz.de</p>
+    </div>
+
     <footer>
         <img src="logo.png" alt="Ultraschall-Gefaess-Quiz Logo">
         <p>© 2024 Ultraschall-Gefaess-Quiz. All rights reserved.</p>
@@ -196,7 +203,9 @@
                 "monthNames": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
                 "dayNames": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
                 "aboutTitle": "Über uns",
-                "aboutDescription": "Hier können Sie Ihr Team vorstellen. Beschreiben Sie Ihre Teammitglieder und deren Rolle im Projekt."
+                "aboutDescription": "Hier können Sie Ihr Team vorstellen. Beschreiben Sie Ihre Teammitglieder und deren Rolle im Projekt.",
+                "contactTitle": "Kontakt",
+                "contactDescription": "E-Mail: info@ultraschall-gefaess-quiz.de"
             },
             "en": {
                 "title": "Welcome to Ultrasound Vessel Quiz",
@@ -206,7 +215,9 @@
                 "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 "dayNames": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
                 "aboutTitle": "About Us",
-                "aboutDescription": "Here you can introduce your team. Describe your team members and their role in the project."
+                "aboutDescription": "Here you can introduce your team. Describe your team members and their role in the project.",
+                "contactTitle": "Contact",
+                "contactDescription": "Email: info@ultrasound-vessel-quiz.com"
             }
         };
 
@@ -220,6 +231,8 @@
             document.getElementById('description').innerText = translations[language].description;
             document.getElementById('about-title').innerText = translations[language].aboutTitle;
             document.getElementById('about-description').innerText = translations[language].aboutDescription;
+            document.getElementById('contact-title').innerText = translations[language].contactTitle;
+            document.getElementById('contact-description').innerText = translations[language].contactDescription;
             renderCalendar(currentMonth, currentYear);
         }
 
