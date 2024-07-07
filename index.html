@@ -100,6 +100,21 @@
             border-radius: 3px;
             font-size: 12px;
         }
+        .separator {
+            border-top: 1px solid #2196F3;
+            width: 100%;
+            margin: 40px 0;
+        }
+        .about-us {
+            width: 100%;
+            max-width: 800px;
+            padding: 0 10px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+        .about-us h2 {
+            text-align: center;
+        }
         @media (max-width: 600px) {
             .day {
                 height: 80px;
@@ -132,6 +147,13 @@
         <div id="calendar-container"></div>
     </div>
 
+    <div class="separator"></div>
+
+    <div class="about-us">
+        <h2 id="about-title">Über uns</h2>
+        <p id="about-description">Hier können Sie Ihr Team vorstellen. Beschreiben Sie Ihre Teammitglieder und deren Rolle im Projekt.</p>
+    </div>
+
     <script>
         const events = {
             "2024-06-07": { title: "Medical Quiz Event 1", color: "#FF5722" },
@@ -146,7 +168,9 @@
                 "previous": "<",
                 "next": ">",
                 "monthNames": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-                "dayNames": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
+                "dayNames": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+                "aboutTitle": "Über uns",
+                "aboutDescription": "Hier können Sie Ihr Team vorstellen. Beschreiben Sie Ihre Teammitglieder und deren Rolle im Projekt."
             },
             "en": {
                 "title": "Welcome to Ultrasound Vessel Quiz",
@@ -154,7 +178,9 @@
                 "previous": "<",
                 "next": ">",
                 "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                "dayNames": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                "dayNames": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                "aboutTitle": "About Us",
+                "aboutDescription": "Here you can introduce your team. Describe your team members and their role in the project."
             }
         };
 
@@ -166,6 +192,8 @@
             currentLanguage = language;
             document.getElementById('title').innerText = translations[language].title;
             document.getElementById('description').innerText = translations[language].description;
+            document.getElementById('about-title').innerText = translations[language].aboutTitle;
+            document.getElementById('about-description').innerText = translations[language].aboutDescription;
             renderCalendar(currentMonth, currentYear);
         }
 
