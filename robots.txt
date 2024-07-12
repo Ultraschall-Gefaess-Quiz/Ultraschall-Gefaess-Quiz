@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://Ultraschall-Gefaess-Quiz.github.io/Ultraschall-Gefaess-Quiz/sitemap.xml
