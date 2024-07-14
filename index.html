@@ -208,9 +208,9 @@
         const eventsEN = {
             "2024-06-07": { title: "Medical Quiz Event 1", color: "#FF5722" },
             "2024-06-15": { title: "Medical Quiz Event 2", color: "#4CAF50" },
-            "2024-07-17": { title: "New Quiz Questions 1 Time 12:00", color: "#4CAF50" },
-            "2024-07-24": { title: "New Quiz Questions 2 Time 12:00", color: "#4CAF50" },
-            "2024-07-31": { title: "New Quiz Questions 3 Time 12:00", color: "#4CAF50" },
+            "2024-07-17": { title: "New Quiz Questions 1 Time 12:00am", color: "#4CAF50" },
+            "2024-07-24": { title: "New Quiz Questions 2 Time 12:00am", color: "#4CAF50" },
+            "2024-07-31": { title: "New Quiz Questions 3 Time 12:00am", color: "#4CAF50" },
             // Add more English events here
         };
 
@@ -276,8 +276,10 @@
             let html = `
                 <table class="calendar">
                     <tr class="month">
-                        <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
+                        <span>&nbsp;&nbsp;</span>
                         <div class="month-name">${monthName} ${year}</div>
+                        <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
+                        <span>&nbsp;&nbsp;</span>
                         <button class="next" onclick="nextMonth()">${translations[currentLanguage].next}</button>
                     </tr>
                     <tr class="day-header">
