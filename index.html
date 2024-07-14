@@ -159,6 +159,29 @@
                 max-width: 40px;
             }
         }
+        @media (orientation: landscape) and (max-width: 600px) {
+            header {
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            header img {
+                max-width: 50px;
+            }
+            .language-switcher {
+                position: static;
+                flex-direction: row;
+                gap: 10px;
+            }
+            .language-switcher button {
+                padding: 0 5px;
+            }
+            .calendar-container {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -276,10 +299,8 @@
             let html = `
                 <table class="calendar">
                     <tr class="month">
-                        <span>&nbsp;&nbsp;</span>
-                        <div class="month-name">${monthName} ${year}</div>
                         <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
-                        <span>&nbsp;&nbsp;</span>
+                        <div class="month-name">${monthName} ${year}</div>
                         <button class="next" onclick="nextMonth()">${translations[currentLanguage].next}</button>
                     </tr>
                     <tr class="day-header">
