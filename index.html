@@ -263,8 +263,8 @@
                 <table class="calendar">
                     <tr class="month">
                         <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
-                        <div class="month-name">${monthName} ${year}</div>
                         <button class="next" onclick="nextMonth()">${translations[currentLanguage].next}</button>
+                        <div class="month-name">${monthName} ${year}</div>
                     </tr>
                     <tr class="day-header">
                         ${dayNames.map(day => `<th>${day}</th>`).join('')}
