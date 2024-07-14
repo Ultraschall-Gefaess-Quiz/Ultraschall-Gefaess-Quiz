@@ -196,13 +196,22 @@
     </footer>
 
     <script>
-        const events = {
-            "2024-06-07": { title: "Medical Quiz Event 1", color: "#FF5722" },
-            "2024-06-15": { title: "Medical Quiz Event 2", color: "#4CAF50" },
+        const eventsDE = {
+            "2024-06-07": { title: "Medizinisches Quiz Event 1", color: "#FF5722" },
+            "2024-06-15": { title: "Medizinisches Quiz Event 2", color: "#4CAF50" },
             "2024-07-17": { title: "Neue Quizfragen 1 Uhrzeit 12:00 Uhr", color: "#4CAF50" },
             "2024-07-24": { title: "Neue Quizfragen 2 Uhrzeit 12:00 Uhr", color: "#4CAF50" },
             "2024-07-31": { title: "Neue Quizfragen 3 Uhrzeit 12:00 Uhr", color: "#4CAF50" },
-            // Add more events here
+            // Add more German events here
+        };
+
+        const eventsEN = {
+            "2024-06-07": { title: "Medical Quiz Event 1", color: "#FF5722" },
+            "2024-06-15": { title: "Medical Quiz Event 2", color: "#4CAF50" },
+            "2024-07-17": { title: "New Quiz Questions 1 Time 12:00", color: "#4CAF50" },
+            "2024-07-24": { title: "New Quiz Questions 2 Time 12:00", color: "#4CAF50" },
+            "2024-07-31": { title: "New Quiz Questions 3 Time 12:00", color: "#4CAF50" },
+            // Add more English events here
         };
 
         const translations = {
@@ -247,6 +256,10 @@
             renderCalendar(currentMonth, currentYear);
         }
 
+        function getEvents() {
+            return currentLanguage === 'de' ? eventsDE : eventsEN;
+        }
+
         function renderCalendar(month, year) {
             const calendarContainer = document.getElementById('calendar-container');
             calendarContainer.innerHTML = generateCalendarHTML(month, year);
@@ -258,14 +271,13 @@
             const firstDay = new Date(year, month, 1).getDay();
             const lastDate = new Date(year, month + 1, 0).getDate();
             const dayNames = translations[currentLanguage].dayNames;
+            const events = getEvents();
 
             let html = `
                 <table class="calendar">
                     <tr class="month">
-                        <span>&nbsp;&nbsp;</span>
-                        <div class="month-name">${monthName} ${year}</div>
                         <button class="prev" onclick="prevMonth()">${translations[currentLanguage].previous}</button>
-                        <span>&nbsp;&nbsp;</span>
+                        <div class="month-name">${monthName} ${year}</div>
                         <button class="next" onclick="nextMonth()">${translations[currentLanguage].next}</button>
                     </tr>
                     <tr class="day-header">
