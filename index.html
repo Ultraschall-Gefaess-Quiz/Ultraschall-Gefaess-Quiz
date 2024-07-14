@@ -21,7 +21,7 @@
         }
         header {
             padding: 20px;
-            background-color: #2196F3; /* Changed to blue */
+            background-color: #2196F3;
             color: white;
             position: relative;
             width: 100%;
@@ -54,7 +54,6 @@
             max-width: 800px;
             padding: 0 10px;
             box-sizing: border-box;
-            overflow-x: auto; /* Ensure it is scrollable horizontally if too wide */
         }
         .calendar {
             display: inline-block;
@@ -140,6 +139,9 @@
             margin: 5px 0;
         }
         @media (max-width: 600px) {
+            .calendar-container {
+                overflow-x: auto;
+            }
             .day {
                 height: 80px;
             }
